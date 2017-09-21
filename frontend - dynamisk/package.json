@@ -1,0 +1,15 @@
+{
+  "name": "frontend-dynamisk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "browser-sync": "^2.18.13"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maiken P. Rais",
+  "license": "ISC"
+}

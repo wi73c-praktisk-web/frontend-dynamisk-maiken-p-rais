@@ -1,0 +1,103 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.demo-content{
+    padding: 10px;
+    font-size: 18px;
+    /* min-height: 20px; */
+    /* background: #dbdfe5; */
+    /* margin-bottom: 10px; */
+}
+
+
+/* @media er for at nulstille paddingen i toppen når vi kommer ned i mobil tilstand */
+body { padding-top: 40px; }
+@media screen and (max-width: 768px) {
+    .inner-section{border: 1px solid black;}
+    body { padding-top: 0px; }
+}
+
+nav h1{
+    margin: 0;
+}
+
+nav h1 a{
+    color: rgb(150, 144, 144);
+    text-decoration: none;
+}
+
+nav h1 a:hover{
+    text-decoration: none;
+    color: rgb(150, 144, 144);
+}
+
+.inner-section{
+    /* margin-left: 10px; */
+    border-radius: 5px;
+}
+
+
+img{
+    width: 100%;
+    height: auto;
+    border-radius: 4%;
+}
+
+
+footer{
+    background-color: #101010;
+    
+}
+
+footer p{
+        margin: 0 0 0 0px;
+}
+
+footer address{
+    margin-bottom: 0;
+}
+
+footer div.container div a{
+    color: #3B3A3A;
+}
+
+i{
+    margin-left: 10px;
+}
+
+#imaginary_container{
+    margin-top:20px;
+} 
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+} */
+
+html {
+    position: relative;
+    min-height: 100%;
+  }
+  
+  /* body {
+    /* Margin bottom by footer height */
+    /* margin-bottom: 60px; */
+  /* }  */
+
+  footer {
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    
+  }
