@@ -95,21 +95,7 @@
 
         <section class="row col-sm-12 demo-content">
             <h2>Populære</h2>
-            <section id="inner-section1" class="celle col-sm-4 demo-content inner-section">
-                <p>Manley Neoclassic 300b</p>
-                <img src="Produktbilleder/effektforstaerkere/manley_neoclassic300b.jpg" alt="">
-                <p>Pris: 1709-,</p>
-            </section>
-            <section id="inner-section1" class="celle col-sm-4 demo-content inner-section">
-                <p>Manley Neoclassic 300b</p>
-                <img src="Produktbilleder/effektforstaerkere/manley_neoclassic300b.jpg" alt="">
-                <p>Pris: 1709-,</p>
-            </section>
-            <section id="inner-section1" class="celle col-sm-4 demo-content inner-section">
-                <p>Manley Neoclassic 300b</p>
-                <img src="Produktbilleder/effektforstaerkere/manley_neoclassic300b.jpg" alt="">
-                <p>Pris: 1709-,</p>
-            </section>
+            <div id="populær"></div>
         </section>
 
     </main>
@@ -170,14 +156,32 @@
             .then((data) => {
                 // nu er json objektet lagt ind i data variablen, udskriv data
                 console.log(data);
-                
+
                 // document.getElementById('content').innerHTML = data[0].navn + " " + data[0].pris;
                 data.forEach(function (element) {
                     document.getElementById('content').innerHTML += `<section class="celle col-sm-4 demo-content inner-section">
                 <p>${element.navn}</p>
                 <img src="Produktbilleder/${element.img}" alt="">
-                <p>${element.pris}</p>
+                <p>${element.pris} kr.</p>
             </section>`;
+                }, this);
+            })
+
+            fetch('http://localhost:1337/produkt_pop')
+            .then((response) => {
+                // grib svarets indhold (body) og send det som et json objekt til næste .then()
+                return response.json();
+            })
+            .then((data) => {
+                // nu er json objektet lagt ind i data variablen, udskriv data
+                console.log(data);
+
+                data.forEach(function (element) {
+                    document.getElementById('populær').innerHTML += `<section class="celle col-sm-4 demo-content inner-section">
+                    <p>${element.navn}</p>
+                    <img src="Produktbilleder/${element.img}" alt="">
+                    <p>${element.pris} kr.</p>
+                </section>`
                 }, this);
             })
     </script>
