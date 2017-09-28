@@ -35,27 +35,14 @@
                     <li class="dropdown">
                         <a href="produkter.html" class="dropdown-toggle" data-toggle="dropdown">Produkter<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li class="dropdown-submenu">
-                                <a class="test" tabindex="-1" href="produkter.html">Forstærkere <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a tabindex="-1" href="produkter.html">id#1</a></li>
-                                    <li><a tabindex="-1" href="produkter.html">id#2</a></li>
-                                </ul>
+                            <li AAAAonclick='afspillere()' class="dropdown-submenu">
+                                <a class="test" tabindex="-1" href="produkter.html?kategori=1">Afspillere<span class="caret"></span></a>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="test" tabindex="-1" href="produkter.html">Afspillere <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a tabindex="-1" href="produkter.html">id#1</a></li>
-                                    <li><a tabindex="-1" href="produkter.html">id#2</a></li>
-
-                                </ul>
+                                <a class="test" tabindex="-1" href="produkter.html?kategori=2">Højtalere<span class="caret"></span></a>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="test" tabindex="-1" href="#">Højtalere <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a tabindex="-1" href="#">id#1</a></li>
-                                    <li><a tabindex="-1" href="#">id#2</a></li>
-                                </ul>
+                                <a class="test" tabindex="-1" href="produkter.html?kategori=3">Forstærkere<span class="caret"></span></a>
                             </li>
                         </ul>
                     </li>
@@ -94,8 +81,10 @@
         </section>
 
         <section class="row col-sm-12 demo-content">
-            <h2>Populære</h2>
-            <div id="populær"></div>
+            
+            <div id="populær">
+                <h2>Populære</h2>
+            </div>
         </section>
 
     </main>
@@ -118,6 +107,8 @@
     </footer>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="produkter.js"></script>
+    
 
     <!-- <script>
         var equalColumns = function () {
@@ -159,7 +150,7 @@
 
                 // document.getElementById('content').innerHTML = data[0].navn + " " + data[0].pris;
                 data.forEach(function (element) {
-                    document.getElementById('content').innerHTML += `<section class="celle col-sm-4 demo-content inner-section">
+                    document.getElementById('content').innerHTML += `<section onclick="hentEnkeltProdukt(${element.id})" class="celle col-sm-4 demo-content inner-section">
                 <p>${element.navn}</p>
                 <img src="Produktbilleder/${element.img}" alt="">
                 <p>${element.pris} kr.</p>
@@ -177,7 +168,7 @@
                 console.log(data);
 
                 data.forEach(function (element) {
-                    document.getElementById('populær').innerHTML += `<section class="celle col-sm-4 demo-content inner-section">
+                    document.getElementById('populær').innerHTML += `<section  onclick="hentEnkeltProdukt(${element.id})" class="celle col-sm-4 demo-content inner-section">
                     <p>${element.navn}</p>
                     <img src="Produktbilleder/${element.img}" alt="">
                     <p>${element.pris} kr.</p>
