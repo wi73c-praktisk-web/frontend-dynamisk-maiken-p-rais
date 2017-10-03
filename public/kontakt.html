@@ -59,21 +59,23 @@
         <hr>
 
         <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <div id="imaginary_container">
-                        <div class="input-group stylish-input-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                            <span class="input-group-addon">
-                                    <button type="submit">
-                                        <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                            </span>
+                <form id="searchForm" action="" method="get">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div id="imaginary_container">
+                                <div class="input-group stylish-input-group">
+                                    <input id="search" type="text" class="form-control" placeholder="Search">
+                                    <span class="input-group-addon">
+                                        <button type="submit">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
-        </div>
 
         <section class="row col-sm-12 demo-content">
             <h2>Kontakt</h2>
@@ -145,6 +147,7 @@
     </footer>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="search.js"></script>
 
     <!-- <script>
         var equalColumns = function () {

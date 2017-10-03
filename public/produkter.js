@@ -25,101 +25,145 @@
 
 //=============================================
 
-function hentProdukter(){
+function hentProdukter() {
     // console.log('pølse')
     // alert(id);
     var url = 'http://localhost:1337/produkter';
-    
-fetch(url)
-    .then((response) => {
-        // console.log('hej verden');
-        // grib svarets indhold (body) og send det som et json objekt til næste .then()
-        return response.json();
-    })
-    .then((data) => {
-        // nu er json objektet lagt ind i data variablen, udskriv data
-        console.log(data);
 
-        document.getElementById('produkter').innerHTML += '<h2>produkter</h2>'
-        data.forEach(function (element) {
-            document.getElementById('produkter').innerHTML += `
+    fetch(url)
+        .then((response) => {
+            // console.log('hej verden');
+            // grib svarets indhold (body) og send det som et json objekt til næste .then()
+            return response.json();
+        })
+        .then((data) => {
+            // nu er json objektet lagt ind i data variablen, udskriv data
+            console.log(data);
+
+            document.getElementById('produkter').innerHTML += '<h2>produkterx</h2>'
+            data.forEach(function (element) {
+                document.getElementById('produkter').innerHTML += `
             <section class="celle col-sm-4 demo-content inner-section">
             <p>${element.navn}</p>
             <img src="Produktbilleder/${element.img}" alt="">                            
                             
             </section>`;
-        }, this);
-    })
+            }, this);
+        })
 }
 
 //=============================================
 // hentProdukterByKategori(3)
 
-function hentProdukterByKategori(kategoriId){
+function hentProdukterByKategori(kategoriId) {
     console.log(kategoriId)
     // console.log('pølse')
     // alert('test');
-fetch('http://localhost:1337/produkter/kategori/' + kategoriId)
-    .then((response) => {
-        // console.log('hej verden');
-        // grib svarets indhold (body) og send det som et json objekt til næste .then()
-        return response.json();
-    })
-    .then((data) => {
-        // nu er json objektet lagt ind i data variablen, udskriv data
-        console.log(data);
+    fetch('http://localhost:1337/produkter/kategori/' + kategoriId)
+        .then((response) => {
+            // console.log('hej verden');
+            // grib svarets indhold (body) og send det som et json objekt til næste .then()
+            return response.json();
+        })
+        .then((data) => {
+            // nu er json objektet lagt ind i data variablen, udskriv data
+            console.log(data);
 
-        document.getElementById('produkter').innerHTML += '<h2>produkter</h2>'
-        data.forEach(function (element) {
-            document.getElementById('produkter').innerHTML += `
+            // var antal = data.length;
+            // console.log(antal);
+            // if (antal > 0) {
+            //     console.log("minimum 1 produkt");
+            //     console.log(data[0].);
+            // } else{
+            //     console.log("ingen produkter");
+            // }
+            document.getElementById('produkter').innerHTML += '<h2>produkter2</h2>'
+            data.forEach(function (element) {
+                document.getElementById('produkter').innerHTML += `
             <section onclick="hentSpecifiktProdukt(${element.id})" class="celle col-sm-4 demo-content inner-section">
             <p>${element.navn}</p>
             <img src="Produktbilleder/${element.img}" alt="">                            
                             
             </section>`;
-        }, this);
-    })
+            }, this);
+        })
 }
 
 //==========================================
 
-var parseQueryString = function(url) {
+function showSearch(search) {
+    // console.log(kategoriId)
+    // console.log('pølse')
+    // alert('test');
+    fetch('http://localhost:1337/produkter/search/' + search)
+        .then((response) => {
+            // console.log('hej verden');
+            // grib svarets indhold (body) og send det som et json objekt til næste .then()
+            return response.json();
+        })
+        .then((data) => {
+            // nu er json objektet lagt ind i data variablen, udskriv data
+            console.log(data);
+
+            // var antal = data.length;
+            // console.log(antal);
+            // if (antal > 0) {
+            //     console.log("minimum 1 produkt");
+            //     console.log(data[0].);
+            // } else{
+            //     console.log("ingen produkter");
+            // }
+            document.getElementById('produkter').innerHTML += '<h2>produkter2</h2>'
+            data.forEach(function (element) {
+                document.getElementById('produkter').innerHTML += `
+            <section onclick="hentSpecifiktProdukt(${element.id})" class="celle col-sm-4 demo-content inner-section">
+            <p>${element.navn}</p>
+            <img src="Produktbilleder/${element.img}" alt="">                            
+                            
+            </section>`;
+            }, this);
+        })
+}
+
+//==========================================
+
+var parseQueryString = function (url) {
     var urlParams = {};
     url = url + "";
     url.replace(
-      new RegExp("([^?=&]+)(=([^&]*))?", "g"),
-      function($0, $1, $2, $3) {
-        urlParams[$1] = $3;
-      }
+        new RegExp("([^?=&]+)(=([^&]*))?", "g"),
+        function ($0, $1, $2, $3) {
+            urlParams[$1] = $3;
+        }
     );
-    
+
     return urlParams;
-  }
+}
 
-  //=====================================
+//=====================================
 
-  function hentEnkeltProdukt(id){
+function hentEnkeltProdukt(id) {
     // console.log('pølse')
     // alert(id);
     var url = 'http://localhost:1337/produkter';
-    if (id){
+    if (id) {
         url += "/" + id;
     }
-fetch(url)
-    .then((response) => {
-        // console.log('hej verden');
-        // grib svarets indhold (body) og send det som et json objekt til næste .then()
-        return response.json();
-    })
-    .then((data) => {
-        // nu er json objektet lagt ind i data variablen, udskriv data
-        console.log(data);
-        document.getElementById('content').innerHTML = "";
-        document.getElementById('populær').innerHTML = "";
+    fetch(url)
+        .then((response) => {
+            // console.log('hej verden');
+            // grib svarets indhold (body) og send det som et json objekt til næste .then()
+            return response.json();
+        })
+        .then((data) => {
+            // nu er json objektet lagt ind i data variablen, udskriv data
+            console.log(data);
+            document.getElementById('content').innerHTML = "";
+            document.getElementById('populær').innerHTML = "";
 
-        document.getElementById('content').innerHTML += '<h2>produkter</h2> <a href="http://localhost:3000/index.html" > Tilbage</a>' 
-        data.forEach(function (element) {
-            document.getElementById('content').innerHTML += `
+            document.getElementById('content').innerHTML += '<h2>produkter</h2> <a href="http://localhost:3000/index.html" > Tilbage</a>'
+            data.forEach(function (element) {
+                document.getElementById('content').innerHTML += `
             <section class="celle col-sm-4 demo-content inner-section">
             <p>${element.navn}</p>
             <img src="Produktbilleder/${element.img}" alt="">                            
@@ -127,33 +171,33 @@ fetch(url)
             <p>Varenr.: ${element.varenr}</p>                            
             <p>${element.pris} kr.</p>          
             </section>`;
-        }, this);
-    })
+            }, this);
+        })
 }
 
 //===================================
 
-function hentSpecifiktProdukt(id){
+function hentSpecifiktProdukt(id) {
     // console.log('pølse')
     // alert(id);
     var url = 'http://localhost:1337/produkter';
-    if (id){
+    if (id) {
         url += "/" + id;
     }
-fetch(url)
-    .then((response) => {
-        // console.log('hej verden');
-        // grib svarets indhold (body) og send det som et json objekt til næste .then()
-        return response.json();
-    })
-    .then((data) => {
-        // nu er json objektet lagt ind i data variablen, udskriv data
-        console.log(data);
-        document.getElementById('produkter').innerHTML = "";
+    fetch(url)
+        .then((response) => {
+            // console.log('hej verden');
+            // grib svarets indhold (body) og send det som et json objekt til næste .then()
+            return response.json();
+        })
+        .then((data) => {
+            // nu er json objektet lagt ind i data variablen, udskriv data
+            console.log(data);
+            document.getElementById('produkter').innerHTML = "";
 
-        document.getElementById('produkter').innerHTML += '<h2>produkter</h2> <a href="" > Tilbage</a>' 
-        data.forEach(function (element) {
-            document.getElementById('produkter').innerHTML += `
+            document.getElementById('produkter').innerHTML += '<h2>produkter</h2> <a href="" > Tilbage</a>'
+            data.forEach(function (element) {
+                document.getElementById('produkter').innerHTML += `
             <section class="celle col-sm-4 demo-content inner-section">
             <p>${element.navn}</p>
             <img src="Produktbilleder/${element.img}" alt="">                            
@@ -161,6 +205,6 @@ fetch(url)
             <p>Varenr.: ${element.varenr}</p>                            
             <p>${element.pris} kr.</p> 
             </section>`;
-        }, this);
-    })
+            }, this);
+        })
 }
