@@ -18,7 +18,7 @@ document.querySelector('#send').addEventListener('click', (event) => {
         mode: 'cors'
     };
 
-    let request = new Request('http://localhost:1337/create', init);
+    let request = new Request('http://localhost:1337/kontakt', init);
 
     fetch(request)
         .then(response => { console.log(response) }).catch(err => { console.log(err) });

@@ -7,11 +7,12 @@
 .demo-content{
     padding: 10px;
     font-size: 18px;
+    display: flex;
+    flex-direction: column;
     /* min-height: 20px; */
     /* background: #dbdfe5; */
     /* margin-bottom: 10px; */
 }
-
 
 /* @media er for at nulstille paddingen i toppen når vi kommer ned i mobil tilstand */
 body { padding-top: 40px; }
@@ -104,4 +105,52 @@ html {
     width: 100%;
     /* Set the fixed height of the footer here */
     
+  }
+
+  #adminform label{
+      width: 150px;
+  }
+
+  #gem{
+    margin-left: 155px;
+  }
+  
+  #annuller {
+    margin-left: 80px;
+}
+
+  .admin-section{
+      border-bottom: solid 1px black;
+      width: 50%;
+      padding-bottom: 10px;
+  }
+
+  .table{
+      width: 50%;
+  }
+
+  /* table tr td{
+      padding-right: 10px;
+      padding-top: 10px;
+  }
+
+  table tr th{
+    border-bottom: solid 2px black;
+  } */
+
+
+  .sletButton{
+      padding: 5px;
+      border-radius: 5px;
+      color: red;
+      border: solid 1px black;
+      line-height: 20px;
+  }
+
+  .retButton{
+      border: solid 1px black;
+      padding: 5px;
+      border-radius: 5px;
+      color: green;
+      line-height: 20px;
   }
