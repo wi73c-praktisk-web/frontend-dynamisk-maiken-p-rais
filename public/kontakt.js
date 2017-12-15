@@ -22,5 +22,6 @@ document.querySelector('#send').addEventListener('click', (event) => {
 
     fetch(request)
         .then(response => { console.log(response) }).catch(err => { console.log(err) });
-
+    alert("Besked sendt");
+    // window.location.replace(`kontakt.html`);
 });

@@ -91,7 +91,9 @@ function hentProdukter() {
 }
 
 document.addEventListener("DOMContentLoaded", event => {
-
+    if (localStorage.getItem('token') === null) {
+        window.location.assign('login.html');
+  }
     if (getParameterByName('action') == "edit") {
         let id = (getParameterByName('id') != null ? getParameterByName('id') : 0);
 
@@ -186,6 +188,13 @@ document.addEventListener("DOMContentLoaded", event => {
         let pris = document.querySelector('#pris').value;
         let kategori = document.querySelector('#kategori').value;
         let producent = document.querySelector('#producent').value;
+        // let Authorization = localStorage.getItem('token');
+        // let userId = localStorage.getItem('userid');
+        // console.log(userId);
+    
+//Hvis de udkommenterede linjer her over og i POST her under bliver slået til igen, 
+//og de to linjer her under inden let init bliver udkommenteret, så opstår der en fejl.
+//Fejlbeskeden i consollen siger, at "Request header field userID is not allowed by Access-Control-Allow-Headers in preflight response."
 
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -193,6 +202,11 @@ document.addEventListener("DOMContentLoaded", event => {
         let init = {
             method: 'POST',
             headers: headers,
+            // {
+            //     'Authorization': localStorage.getItem('token'),
+            //     'userID': localStorage.getItem('userid'),
+            //     'Content-Type': 'application/json'
+            // },
             body: `{"navn":"${navn}","varenr":"${varenr}","beskrivelse":"${beskrivelse}","pris":"${pris}", 
         "kategori":"${kategori}", "producent":"${producent}" }`,
             cache: 'no-cache',
