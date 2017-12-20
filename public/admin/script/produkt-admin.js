@@ -11,14 +11,20 @@ function getParameterByName(name, url) {
 // slet funktionen, bindes til hver slet knap efter alle produkterne er hentet
 function sletItem(event) {
     if (confirm('Er du sikker?')) {
+        let Authorization = localStorage.getItem('token');
+        let userId = localStorage.getItem('userid');
         let id = (isNaN(event.target.dataset['id']) ? 0 : event.target.dataset['id']);
 
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        // let headers = new Headers();
+        // headers.append('Content-Type', 'application/json');
 
         let init = {
             method: 'delete',
-            headers: headers,
+            headers: {
+                'Authorization': localStorage.getItem('token'),
+                'userID': localStorage.getItem('userid'),
+                'Content-Type': 'application/json'
+            },
             cache: 'no-cache'
         };
         let request = new Request(`http://localhost:1337/produkt/${id}`, init);
@@ -61,6 +67,7 @@ function hentProdukter() {
                   <th>Navn</th>
                   <th>Varenr</th>
                   <th>Pris</th>
+                  <th>Billede</th>
                </tr>`
 
             for (let i = 0; i < data.length; i++) {
@@ -73,6 +80,7 @@ function hentProdukter() {
                 <td>${data[i].navn}</td>
                 <td>${data[i].varenr}</td>
                 <td>${data[i].pris}</td>
+                <td><img src="../../Produktbilleder/${data[i].img}" alt=""></td>
               </tr>`;
             }
             liste += `</table><hr>`;
@@ -93,7 +101,46 @@ function hentProdukter() {
 document.addEventListener("DOMContentLoaded", event => {
     if (localStorage.getItem('token') === null) {
         window.location.assign('login.html');
-  }
+    }
+
+    fetch(`http://localhost:1337/kategorier`)
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+        })
+        .then((json) => {
+            var selectBox = document.querySelector("#kategori");
+            console.log(selectBox);
+
+            for (let i = 0; i < json.length; i++) {
+                let option = document.createElement("option");
+                option.text = json[i].navn;
+                option.value = json[i].id;
+                console.log(option);
+                selectBox.add(option);
+            }
+        })
+
+    fetch(`http://localhost:1337/producenter`)
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+        })
+        .then((json) => {
+            var selectBox = document.querySelector("#producent");
+            console.log(selectBox);
+
+            for (let i = 0; i < json.length; i++) {
+                let option = document.createElement("option");
+                option.text = json[i].navn;
+                option.value = json[i].id;
+                console.log(option);
+                selectBox.add(option);
+            }
+        })
+
     if (getParameterByName('action') == "edit") {
         let id = (getParameterByName('id') != null ? getParameterByName('id') : 0);
 
@@ -128,6 +175,8 @@ document.addEventListener("DOMContentLoaded", event => {
                     let pris = document.querySelector('#pris').value;
                     let kategori = document.querySelector('#kategori').value;
                     let producent = document.querySelector('#producent').value;
+                    let Authorization = localStorage.getItem('token');
+                    let userId = localStorage.getItem('userid');
                     let id = (getParameterByName('id') != null ? getParameterByName('id') : 0);
 
                     // erstat komma med punkt, så isNaN funktionen fungerer hensigtsmæssigt
@@ -136,12 +185,16 @@ document.addEventListener("DOMContentLoaded", event => {
                     if (navn != '' && varenr != '' && beskrivelse != '' && !isNaN(pris) && kategori != '' && producent != '' && id > 0) {
                         document.querySelector('#udfyldningMangler').innerHTML = "";
                         let url = `http://localhost:1337/produkter/${id}`;
-                        let headers = new Headers();
-                        headers.append('Content-Type', 'application/json');
+                        // let headers = new Headers();
+                        // headers.append('Content-Type', 'application/json');
 
                         let init = {
                             method: 'put',
-                            headers: headers,
+                            headers: {
+                                'Authorization': localStorage.getItem('token'),
+                                'userID': localStorage.getItem('userid'),
+                                'Content-Type': 'application/json'
+                            },
                             body: JSON.stringify({
                                 navn: navn,
                                 varenr: varenr,
@@ -175,53 +228,55 @@ document.addEventListener("DOMContentLoaded", event => {
             .catch((err) => {
                 console.log(err);
             });
-    
+
     } else {
-    console.log('svend')
-    // Lytter på om der er klikket på knappen gem - herefter postes data som indsættes i databasen
-    document.querySelector('#gem').addEventListener('click', (event) => {
-        console.log('event ok');
-        event.preventDefault();
-        let navn = document.querySelector('#navn').value;
-        let varenr = document.querySelector('#varenr').value;
-        let beskrivelse = document.querySelector('#beskrivelse').value;
-        let pris = document.querySelector('#pris').value;
-        let kategori = document.querySelector('#kategori').value;
-        let producent = document.querySelector('#producent').value;
-        // let Authorization = localStorage.getItem('token');
-        // let userId = localStorage.getItem('userid');
-        // console.log(userId);
-    
-//Hvis de udkommenterede linjer her over og i POST her under bliver slået til igen, 
-//og de to linjer her under inden let init bliver udkommenteret, så opstår der en fejl.
-//Fejlbeskeden i consollen siger, at "Request header field userID is not allowed by Access-Control-Allow-Headers in preflight response."
+        console.log('svend')
+        // Lytter på om der er klikket på knappen gem - herefter postes data som indsættes i databasen
+        document.querySelector('#gem').addEventListener('click', (event) => {
+            console.log('event ok');
+            event.preventDefault();
+            let navn = document.querySelector('#navn').value;
+            let varenr = document.querySelector('#varenr').value;
+            let beskrivelse = document.querySelector('#beskrivelse').value;
+            let pris = document.querySelector('#pris').value;
+            let kategori = document.querySelector('#kategori').value;
+            let producent = document.querySelector('#producent').value;
+            let Authorization = localStorage.getItem('token');
+            let userId = localStorage.getItem('userid');
+            // console.log(userId);
 
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+            //Hvis de udkommenterede linjer her over og i POST her under bliver slået til igen, 
+            //og de to linjer her under inden let init bliver udkommenteret, så opstår der en fejl.
+            //Fejlbeskeden i consollen siger, at "Request header field userID is not allowed by Access-Control-Allow-Headers in preflight response."
 
-        let init = {
-            method: 'POST',
-            headers: headers,
-            // {
-            //     'Authorization': localStorage.getItem('token'),
-            //     'userID': localStorage.getItem('userid'),
-            //     'Content-Type': 'application/json'
-            // },
-            body: `{"navn":"${navn}","varenr":"${varenr}","beskrivelse":"${beskrivelse}","pris":"${pris}", 
+            // let headers = new Headers();
+            // headers.append('Content-Type', 'application/json');
+
+            let init = {
+                method: 'POST',
+                headers:
+                {
+                    'Authorization': localStorage.getItem('token'),
+                    'userID': localStorage.getItem('userid'),
+                    'Content-Type': 'application/json'
+                },
+                body: `{"navn":"${navn}","varenr":"${varenr}","beskrivelse":"${beskrivelse}","pris":"${pris}", 
         "kategori":"${kategori}", "producent":"${producent}" }`,
-            cache: 'no-cache',
-            mode: 'cors'
-        };
+                cache: 'no-cache',
+                mode: 'cors'
+            };
 
-        let request = new Request('http://localhost:1337/produkt', init);
+            let request = new Request('http://localhost:1337/produkt', init);
 
-        fetch(request)
-            .then(response => { console.log(response) }).catch(err => { console.log(err) });
+            fetch(request)
+                .then(response => { console.log(response) }).catch(err => { 
+                    alert("STOP!");
+                    console.log(err) });
 
-    });
-}
+        });
+    }
 
-hentProdukter()
+    hentProdukter()
 
 })
 

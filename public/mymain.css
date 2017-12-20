@@ -154,3 +154,11 @@ html {
       color: green;
       line-height: 20px;
   }
+
+  #logud{
+      background-color: #363636;
+      color: #9d9d9d;
+      border: none;
+      margin-top: 15px;
+      margin-left: 15px;
+  }

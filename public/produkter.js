@@ -59,6 +59,18 @@ function hentProdukterByKategori(kategoriId) {
     console.log(kategoriId)
     // console.log('pølse')
     // alert('test');
+
+    fetch('http://localhost:1337/kategorier/' + kategoriId)
+    .then((response) => {
+        // console.log('hej verden');
+        // grib svarets indhold (body) og send det som et json objekt til næste .then()
+        return response.json();
+    })
+    .then((data) => {
+        document.getElementById('titel').innerHTML = data[0].navn;
+    });
+
+
     fetch('http://localhost:1337/produkter/kategori/' + kategoriId)
         .then((response) => {
             // console.log('hej verden');
@@ -77,7 +89,7 @@ function hentProdukterByKategori(kategoriId) {
             // } else{
             //     console.log("ingen produkter");
             // }
-            document.getElementById('produkter').innerHTML += '<h2>produkter2</h2>'
+            // document.getElementById('produkter').innerHTML += '<h2>produkter2</h2>'
             data.forEach(function (element) {
                 document.getElementById('produkter').innerHTML += `
             <section onclick="hentSpecifiktProdukt(${element.id})" class="celle col-sm-4 demo-content inner-section">
@@ -113,7 +125,7 @@ function showSearch(search) {
             // } else{
             //     console.log("ingen produkter");
             // }
-            document.getElementById('produkter').innerHTML += '<h2>produkter2</h2>'
+            // document.getElementById('produkter').innerHTML += '<h2>produkter2</h2>'
             data.forEach(function (element) {
                 document.getElementById('produkter').innerHTML += `
             <section onclick="hentSpecifiktProdukt(${element.id})" class="celle col-sm-4 demo-content inner-section">
@@ -161,7 +173,7 @@ function hentEnkeltProdukt(id) {
             document.getElementById('content').innerHTML = "";
             document.getElementById('populær').innerHTML = "";
 
-            document.getElementById('content').innerHTML += '<h2>produkter</h2> <a href="http://localhost:3000/index.html" > Tilbage</a>'
+            document.getElementById('content').innerHTML += '<a href="http://localhost:3000/index.html" > Tilbage</a>'
             data.forEach(function (element) {
                 document.getElementById('content').innerHTML += `
             <section class="celle col-sm-4 demo-content inner-section">
@@ -195,7 +207,7 @@ function hentSpecifiktProdukt(id) {
             console.log(data);
             document.getElementById('produkter').innerHTML = "";
 
-            document.getElementById('produkter').innerHTML += '<h2>produkter</h2> <a href="" > Tilbage</a>'
+            document.getElementById('produkter').innerHTML += '<a href="" > Tilbage</a>'
             data.forEach(function (element) {
                 document.getElementById('produkter').innerHTML += `
             <section class="celle col-sm-4 demo-content inner-section">

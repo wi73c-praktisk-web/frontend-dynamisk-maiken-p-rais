@@ -24,7 +24,8 @@
                 .then((data) => {
                     localStorage.setItem('token', data.AccessToken);
                     localStorage.setItem('userid', data.ID);
-                    document.getElementById('status').innerHTML = "Du er nu logget ind ...";
+                    window.location.replace("http://localhost:3000/admin/produkt-admin.html");
+                    // document.getElementById('status').innerHTML = "Du er nu logget ind ...";
                 })
                 .catch((err) => {
                     console.log(err);
@@ -38,5 +39,6 @@
 document.getElementById('logud').addEventListener('click', () => {
     if (confirm('Vil du logge af?')) {
         localStorage.clear();
+        window.location.replace("http://localhost:3000/index.html");
     }
 })
