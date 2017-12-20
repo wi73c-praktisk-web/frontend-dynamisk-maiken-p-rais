@@ -105,22 +105,6 @@
     <script src="produkter.js"></script>
     <script src="search.js"></script>
 
-    <script>
-        var urlParameter = parseQueryString(window.location);
-        console.log(urlParameter.kategori);
-        if (urlParameter.search != null) {
-            showSearch(urlParameter.search)
-            console.log(urlParameter.search);
-        }
-        else if (urlParameter.kategori != null) {
-            hentProdukterByKategori(urlParameter.kategori)
-        }
-        else {
-
-            hentProdukter()
-        }
-    </script>
-
     <!-- <script>
         var equalColumns = function () {
             // console.log("hej");

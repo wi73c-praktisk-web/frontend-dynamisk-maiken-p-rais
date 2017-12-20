@@ -61,14 +61,14 @@ function hentProdukterByKategori(kategoriId) {
     // alert('test');
 
     fetch('http://localhost:1337/kategorier/' + kategoriId)
-    .then((response) => {
-        // console.log('hej verden');
-        // grib svarets indhold (body) og send det som et json objekt til næste .then()
-        return response.json();
-    })
-    .then((data) => {
-        document.getElementById('titel').innerHTML = data[0].navn;
-    });
+        .then((response) => {
+            // console.log('hej verden');
+            // grib svarets indhold (body) og send det som et json objekt til næste .then()
+            return response.json();
+        })
+        .then((data) => {
+            document.getElementById('titel').innerHTML = data[0].navn;
+        });
 
 
     fetch('http://localhost:1337/produkter/kategori/' + kategoriId)
@@ -91,8 +91,16 @@ function hentProdukterByKategori(kategoriId) {
             // }
             // document.getElementById('produkter').innerHTML += '<h2>produkter2</h2>'
             data.forEach(function (element) {
+
+                // document.getElementById('produkter').innerHTML += `
+                // <section onclick="hentSpecifiktProdukt(${element.id})" class="celle col-sm-4 demo-content inner-section">
+                // <p>${element.navn}</p>
+                // <img src="Produktbilleder/${element.img}" alt="">                            
+
+                // </section>`;
+
                 document.getElementById('produkter').innerHTML += `
-            <section onclick="hentSpecifiktProdukt(${element.id})" class="celle col-sm-4 demo-content inner-section">
+            <section onclick="window.location.replace('http://localhost:3000/produkter.html?kategori=${kategoriId}&produkt=${element.id}')" class="celle col-sm-4 demo-content inner-section">
             <p>${element.navn}</p>
             <img src="Produktbilleder/${element.img}" alt="">                            
                             
@@ -172,7 +180,7 @@ function hentEnkeltProdukt(id) {
             document.getElementById('content').innerHTML = "";
             document.getElementById('populær').innerHTML = "";
 
-            document.getElementById('content').innerHTML += '<a href="http://localhost:3000/index.html" > Tilbage</a>'
+            document.getElementById('content').innerHTML += '<a href="http://localhost:3000/index.html" > Tilbage1</a>'
             data.forEach(function (element) {
                 document.getElementById('content').innerHTML += `
             <section class="celle col-sm-4 demo-content inner-section">
@@ -206,7 +214,9 @@ function hentSpecifiktProdukt(id) {
             console.log(data);
             document.getElementById('produkter').innerHTML = "";
 
-            document.getElementById('produkter').innerHTML += '<a href="" > Tilbage</a>'
+            var urlParameter = parseQueryString(window.location);
+            var minOnclick = `window.location.replace('http://localhost:3000/produkter.html?kategori=${urlParameter.kategori}')`
+            document.getElementById('produkter').innerHTML += `<a href="#" onclick="${minOnclick}"> Tilbage2</a>`
             data.forEach(function (element) {
                 document.getElementById('produkter').innerHTML += `
             <section class="celle col-sm-4 demo-content inner-section">
@@ -218,4 +228,24 @@ function hentSpecifiktProdukt(id) {
             </section>`;
             }, this);
         })
+}
+
+
+var urlParameter = parseQueryString(window.location);
+console.log(urlParameter.kategori);
+if (urlParameter.search != null) {
+    showSearch(urlParameter.search)
+    console.log(urlParameter.search);
+}
+else if (urlParameter.produkt != null) {
+    // console.log(urlParameter.produkt)
+    hentSpecifiktProdukt(urlParameter.produkt);
+}
+else if (urlParameter.kategori != null) {
+    hentProdukterByKategori(urlParameter.kategori)
+}
+
+else {
+
+    hentProdukter()
 }
