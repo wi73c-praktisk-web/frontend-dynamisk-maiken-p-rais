@@ -243,11 +243,6 @@ document.addEventListener("DOMContentLoaded", event => {
             let producent = document.querySelector('#producent').value;
             let Authorization = localStorage.getItem('token');
             let userId = localStorage.getItem('userid');
-            // console.log(userId);
-
-            //Hvis de udkommenterede linjer her over og i POST her under bliver slået til igen, 
-            //og de to linjer her under inden let init bliver udkommenteret, så opstår der en fejl.
-            //Fejlbeskeden i consollen siger, at "Request header field userID is not allowed by Access-Control-Allow-Headers in preflight response."
 
             // let headers = new Headers();
             // headers.append('Content-Type', 'application/json');
