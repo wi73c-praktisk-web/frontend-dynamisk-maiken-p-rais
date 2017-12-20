@@ -105,7 +105,6 @@ function hentProdukterByKategori(kategoriId) {
 
 function showSearch(search) {
     // console.log(kategoriId)
-    // console.log('pølse')
     // alert('test');
     fetch('http://localhost:1337/produkter/search/' + search)
         .then((response) => {
