@@ -100,11 +100,13 @@ function hentProdukterByKategori(kategoriId) {
                 // </section>`;
 
                 document.getElementById('produkter').innerHTML += `
-            <section onclick="window.location.replace('http://localhost:3000/produkter.html?kategori=${kategoriId}&produkt=${element.id}')" class="celle col-sm-4 demo-content inner-section">
+            
+            <section onclicsk="window.location.replace('http://localhost:3000/produkter.html?kategori=${kategoriId}&produkt=${element.id}')" class="celle col-sm-4 demo-content inner-section">
+            <a style="display: block" href="http://localhost:3000/produkter.html?kategori=${kategoriId}&produkt=${element.id}">
             <p>${element.navn}</p>
-            <img src="Produktbilleder/${element.img}" alt="">                            
-                            
-            </section>`;
+            <img src="Produktbilleder/${element.img}" alt="">        
+            </a></section>`;
+            // <a href="http://localhost:3000/produkter.html?kategori=${kategoriId}&produkt=${element.id}">Mere</a>                         
             }, this);
         })
 }
@@ -161,6 +163,8 @@ var parseQueryString = function (url) {
 
 //=====================================
 
+//½½ aktuel
+
 function hentEnkeltProdukt(id) {
     // console.log('pølse')
     // alert(id);
@@ -180,7 +184,7 @@ function hentEnkeltProdukt(id) {
             document.getElementById('content').innerHTML = "";
             document.getElementById('populær').innerHTML = "";
 
-            document.getElementById('content').innerHTML += '<a href="http://localhost:3000/index.html" > Tilbage1</a>'
+            document.getElementById('content').innerHTML += '<a href="http://localhost:3000/index.html" > Tilbage</a>'
             data.forEach(function (element) {
                 document.getElementById('content').innerHTML += `
             <section class="celle col-sm-4 demo-content inner-section">
@@ -195,6 +199,8 @@ function hentEnkeltProdukt(id) {
 }
 
 //===================================
+
+//½½ aktuel
 
 function hentSpecifiktProdukt(id) {
     // console.log('pølse')
@@ -214,9 +220,16 @@ function hentSpecifiktProdukt(id) {
             console.log(data);
             document.getElementById('produkter').innerHTML = "";
 
-            var urlParameter = parseQueryString(window.location);
-            var minOnclick = `window.location.replace('http://localhost:3000/produkter.html?kategori=${urlParameter.kategori}')`
+            // var urlParameter = parseQueryString(window.location);
+
+            // var minOnclick = `window.location.replace('http://localhost:3000/produkter.html?kategori=${urlParameter.kategori}')`
+            // document.getElementById('produkter').innerHTML += `<a href="#" onclick="${minOnclick}"> Tilbage</a>`
+
+            //document.getElementById('produkter').innerHTML += `<a href="http://localhost:3000/produkter.html?kategori=${urlParameter.kategori}"> Tilbage</a>`
+
+            var minOnclick = `window.history.go(-1)`
             document.getElementById('produkter').innerHTML += `<a href="#" onclick="${minOnclick}"> Tilbage2</a>`
+
             data.forEach(function (element) {
                 document.getElementById('produkter').innerHTML += `
             <section class="celle col-sm-4 demo-content inner-section">
@@ -230,7 +243,7 @@ function hentSpecifiktProdukt(id) {
         })
 }
 
-
+//½½ aktuel
 var urlParameter = parseQueryString(window.location);
 console.log(urlParameter.kategori);
 if (urlParameter.search != null) {
