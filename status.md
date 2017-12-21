@@ -52,3 +52,15 @@ Jeg har ret godt styr på at oprette database og tabeller og forbinde dem, samt 
 Det hjælper mig heller ikke rigtig at læse om det på nettet, og det der men at søge efter svarene er også svært, når jeg ikke helt ved hvad spørgsmålet er. Og det er svært at finde ud af hvad løsningen er, og hvad der er nemmeste, når der kommer en million forskellige svar. Derfor kan jeg bedre lide at spørge en lærer, end internettet eller en medstuderende!
 
 Jeg er faktisk ret stresset over det, og ved at være bange for, om jeg overhovedet kan klare denne uddannelse :worried: 
+
+# Julestatus
+
+* På adminsiden virker opret, ret og slet.
+* Login og logud virker.
+* Jeg mangler at validerer alle formularer backend og frontend.
+* Jeg mangler at kunne oprette/rette billeder på adminsiden.
+* Det kunne have været smart med et sted på adminsiden, hvor man kan se de beskeder der bliver sendt fra kontaktformularen, så man ikke skal ind i databasen og tjekke det, samt evt. en "besvar"-knap, så man ikke skal ind i databasen og kopiere email fra databasen osv.
+* Jeg har heller ikke fået oprettet droplet på DigitalOcean, så mit HI-FI projekt ligger fortsat kun local.
+
+* Ved login får jeg dog denne besked i consollen og vi(Troels, Frank og jeg) har ikke kunnet finde ud af hvad det er. For fejlen kom fra den ene dag til den anden. Den ene dag var der intet, og dagen efter UDEN jeg havde rørt ved noget kode overhovedet, så kom fejlen: "Uncaught TypeError: Cannot set property 'onsubmit' of null
+    at HTMLDocument.document.addEventListener (login.js:5)"

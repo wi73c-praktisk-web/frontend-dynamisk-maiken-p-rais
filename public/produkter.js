@@ -56,7 +56,7 @@ function hentProdukter() {
 // hentProdukterByKategori(3)
 
 function hentProdukterByKategori(kategoriId) {
-    console.log(kategoriId)
+    // console.log(kategoriId)
     // console.log('pølse')
     // alert('test');
 
@@ -106,14 +106,14 @@ function hentProdukterByKategori(kategoriId) {
             <p>${element.navn}</p>
             <img src="Produktbilleder/${element.img}" alt="">        
             </a></section>`;
-            // <a href="http://localhost:3000/produkter.html?kategori=${kategoriId}&produkt=${element.id}">Mere</a>                         
+                // <a href="http://localhost:3000/produkter.html?kategori=${kategoriId}&produkt=${element.id}">Mere</a>                         
             }, this);
         })
 }
 
 //==========================================
 
-function showSearch(search) {
+function showSearch(search, kategoriId) {
     // console.log(kategoriId)
     // alert('test');
     fetch('http://localhost:1337/produkter/search/' + search)
@@ -138,9 +138,10 @@ function showSearch(search) {
             data.forEach(function (element) {
                 document.getElementById('produkter').innerHTML += `
             <section onclick="hentSpecifiktProdukt(${element.id})" class="celle col-sm-4 demo-content inner-section">
+            <a style="display: block" href="http://localhost:3000/produkter.html?produkt=${element.id}">
             <p>${element.navn}</p>
             <img src="Produktbilleder/${element.img}" alt="">                            
-                            
+             </a>               
             </section>`;
             }, this);
         })
@@ -163,7 +164,6 @@ var parseQueryString = function (url) {
 
 //=====================================
 
-//½½ aktuel
 
 function hentEnkeltProdukt(id) {
     // console.log('pølse')
@@ -184,7 +184,7 @@ function hentEnkeltProdukt(id) {
             document.getElementById('content').innerHTML = "";
             document.getElementById('populær').innerHTML = "";
 
-            document.getElementById('content').innerHTML += '<a href="http://localhost:3000/index.html" > Tilbage</a>'
+            document.getElementById('content').innerHTML += '<a href="http://localhost:3000/index.html" >Tilbage</a>'
             data.forEach(function (element) {
                 document.getElementById('content').innerHTML += `
             <section class="celle col-sm-4 demo-content inner-section">
@@ -200,7 +200,6 @@ function hentEnkeltProdukt(id) {
 
 //===================================
 
-//½½ aktuel
 
 function hentSpecifiktProdukt(id) {
     // console.log('pølse')
@@ -228,7 +227,7 @@ function hentSpecifiktProdukt(id) {
             //document.getElementById('produkter').innerHTML += `<a href="http://localhost:3000/produkter.html?kategori=${urlParameter.kategori}"> Tilbage</a>`
 
             var minOnclick = `window.history.go(-1)`
-            document.getElementById('produkter').innerHTML += `<a href="#" onclick="${minOnclick}"> Tilbage2</a>`
+            document.getElementById('produkter').innerHTML += `<a href="#" onclick="${minOnclick}">Tilbage</a>`
 
             data.forEach(function (element) {
                 document.getElementById('produkter').innerHTML += `
@@ -243,12 +242,12 @@ function hentSpecifiktProdukt(id) {
         })
 }
 
-//½½ aktuel
+
 var urlParameter = parseQueryString(window.location);
-console.log(urlParameter.kategori);
+// console.log(urlParameter.kategori);
 if (urlParameter.search != null) {
-    showSearch(urlParameter.search)
-    console.log(urlParameter.search);
+    showSearch(urlParameter.search);
+    
 }
 else if (urlParameter.produkt != null) {
     // console.log(urlParameter.produkt)
@@ -259,6 +258,10 @@ else if (urlParameter.kategori != null) {
 }
 
 else {
+    console.log("Her udskrives alle produkter, hvis der ikke findes kategori id eller produkt id");
+    var currentPathname = window.location.pathname;
+    if (currentPathname != "/index.html") {
+        hentProdukter()
+    }
 
-    hentProdukter()
 }

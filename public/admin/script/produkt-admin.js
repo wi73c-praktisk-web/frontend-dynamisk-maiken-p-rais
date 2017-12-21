@@ -275,3 +275,9 @@ document.addEventListener("DOMContentLoaded", event => {
 
 })
 
+document.getElementById('logud').addEventListener('click', () => {
+    if (confirm('Vil du logge af?')) {
+        localStorage.clear();
+        window.location.replace("http://localhost:3000/index.html");
+    }
+})

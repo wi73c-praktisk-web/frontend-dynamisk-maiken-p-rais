@@ -1,7 +1,7 @@
 (() => {
     document.addEventListener('DOMContentLoaded', () => {
         const form = document.querySelector('.loginForm');
-
+        console.log(form);
         form.onsubmit = () => {
             console.log('test');
             const data = JSON.stringify({
@@ -36,9 +36,3 @@
     });
 })();
 
-document.getElementById('logud').addEventListener('click', () => {
-    if (confirm('Vil du logge af?')) {
-        localStorage.clear();
-        window.location.replace("http://localhost:3000/index.html");
-    }
-})
